@@ -34,15 +34,20 @@ class ToDo extends React.Component {
   close(e) {
     e.preventDefault();
     e.target.parentElement.remove();
+    var id = e.target.parentElement;
+    this.arr.splice(id.dataset.id, 1);
+    this.setState({
+      note: this.arr,
+    });
   }
-  TodoItem({ props }) {
+  TodoItem({ props, id }) {
     const styleCursor = {
       cursor: "pointer",
       display: "flex",
       justifyContent: "space-between",
     };
     return (
-      <div style={styleCursor}>
+      <div style={styleCursor} data-id={id}>
         <input type="checkbox" onClick={this.checkedNote} />
         <span>{props}</span>
         <button onClick={this.close}>X</button>
@@ -57,7 +62,7 @@ class ToDo extends React.Component {
     return (
       <div style={todo}>
         {this.state.note.map((item, index) => {
-          return <this.TodoItem props={item} key={index} />;
+          return <this.TodoItem props={item} key={index} id={index} />;
         })}
         <div>
           <input type="text" className="input" />
