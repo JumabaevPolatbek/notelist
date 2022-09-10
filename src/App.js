@@ -35,7 +35,7 @@ class ToDo extends React.Component {
     e.preventDefault();
     e.target.parentElement.remove();
     var id = e.target.parentElement;
-    this.arr.splice(id.dataset.id, 1);
+    this.arr.splice(id.dataset.id, id.dataset.id);
     this.setState({
       note: this.arr,
     });
